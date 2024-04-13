@@ -198,7 +198,24 @@ public class JavaSwingCalculator extends JFrame {
 
                 if (OP.equals("=")) {
                     // Calculate
-                    numResult  = "DO SOMETHING";
+                    if (
+                        !numLeft.isEmpty()
+                        && !opPrev.isEmpty()
+                        && !numRight.isEmpty()
+                        && !opCurrent.isEmpty()
+                    ) {
+                        // PERFORM THE ACTUAL CHOSEN OPERATION
+                        switch (opPrev) {
+                            case "+":
+                                numResult = "" + (1 + 2);
+                                break;
+                            case "-":
+                                numResult = "" + (1 - 2);
+                                break;
+                            default:
+                                break;
+                        }                        
+                    }
                 }
                 displayValues();
             }
