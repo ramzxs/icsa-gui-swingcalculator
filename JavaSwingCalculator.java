@@ -160,7 +160,11 @@ public class JavaSwingCalculator extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String NUM = e.getActionCommand();
 
-                numLeft += NUM;
+                if (opPrev.isEmpty()) {
+                    numLeft += NUM;
+                } else {
+                    numRight += NUM;
+                }
                 displayValues();
             }            
         };
