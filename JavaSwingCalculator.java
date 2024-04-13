@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -48,16 +49,21 @@ public class JavaSwingCalculator extends JFrame {
         this.setSize(400, 600);
         this.setLayout(new GridBagLayout());
 
+        Font font1 = new Font(Font.MONOSPACED, Font.PLAIN, 24);
+        Font font2 = new Font(Font.MONOSPACED, Font.BOLD, 30);
+
         // USER INTERFACE COMPONENTS
         lblExpression.setHorizontalAlignment(SwingConstants.TRAILING);
         lblExpression.setOpaque(true);
         lblExpression.setForeground(Color.BLACK);
         lblExpression.setBackground(Color.LIGHT_GRAY);
+        lblExpression.setFont(font1);
 
         lblResult.setHorizontalAlignment(SwingConstants.TRAILING);
         lblResult.setOpaque(true);
         lblResult.setForeground(Color.WHITE);
         lblResult.setBackground(Color.DARK_GRAY);
+        lblResult.setFont(font2);
 
         // UI LAYOUT
         GridBagConstraints gbc = new GridBagConstraints();
@@ -162,7 +168,7 @@ public class JavaSwingCalculator extends JFrame {
         ActionListener alNums = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String NUM = e.getActionCommand();
+                String NUM = e.getActionCommand(); // 0
 
                 if (opPrev.isEmpty()) {
                     numLeft += NUM;
@@ -188,35 +194,58 @@ public class JavaSwingCalculator extends JFrame {
         ActionListener alOps = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String OP =  e.getActionCommand();
+                String OP =  e.getActionCommand(); // +
+
+                if (OP.equals("=") && opPrev.isEmpty())  {
+                    return;
+                }
 
                 if (numLeft.isEmpty()) {
-
+                    // Do nothing
                 } else {
-                    opPrev = OP;
-                }
-
-                if (OP.equals("=")) {
-                    // Calculate
-                    if (
-                        !numLeft.isEmpty()
-                        && !opPrev.isEmpty()
-                        && !numRight.isEmpty()
-                        && !opCurrent.isEmpty()
-                    ) {
-                        // PERFORM THE ACTUAL CHOSEN OPERATION
-                        switch (opPrev) {
-                            case "+":
-                                numResult = "" + (1 + 2);
-                                break;
-                            case "-":
-                                numResult = "" + (1 - 2);
-                                break;
-                            default:
-                                break;
-                        }                        
+                    if (opPrev.isEmpty()) {
+                        opPrev = OP;
+                    } else {
+                        if (numRight.isEmpty()) {
+                            opPrev = OP;
+                        } else {
+                            opCurrent = OP; // +
+                        }
                     }
                 }
+
+                if (!opCurrent.isEmpty()) {
+                    // PERFORM THE ACTUAL CHOSEN OPERATION
+                    switch (opPrev.charAt(0)) { // -
+                        case '+':
+                            numResult = "" + (
+                                Float.parseFloat(numLeft) + Float.parseFloat(numRight));
+                            break;
+                        case '-':
+                            numResult = "" + (Float.parseFloat(numLeft) - Float.parseFloat(numRight));  // 20.0 - 5.0 = 15.0
+                            break;
+                        case '*':
+                            numResult = "" + (Float.parseFloat(numLeft) * Float.parseFloat(numRight));
+                            break;
+                        case '/':
+                            numResult = "" + (Float.parseFloat(numLeft) / Float.parseFloat(numRight));
+                            break;
+                        case '%':
+                            numResult = "" + (Float.parseFloat(numLeft) * ((float) Float.parseFloat(numRight) / 100)); // "" + 3.0 = "3.0"
+                            break;
+                    }
+
+
+                    if (!opCurrent.equals("=")) {
+                        numLeft = numResult;
+                        opPrev = opCurrent;
+                        numRight = "";
+                        opCurrent = "";
+                        numResult = "";
+                    }
+                }
+
+
                 displayValues();
             }
         };
@@ -233,7 +262,7 @@ public class JavaSwingCalculator extends JFrame {
 
 
     public void displayValues() {
-        lblExpression.setText(numLeft + " " + opPrev + " " + numRight + " " + opCurrent);
-        lblResult.setText(numResult);
+        lblExpression.setText(numLeft + " " + opPrev + " " + numRight + " " + opCurrent); // ""
+        lblResult.setText(numResult); // ""
     }
 }
