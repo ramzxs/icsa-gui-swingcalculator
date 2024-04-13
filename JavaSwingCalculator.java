@@ -149,8 +149,12 @@ public class JavaSwingCalculator extends JFrame {
         btnClear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                lblExpression.setText("");
-                lblResult.setText("");
+                numLeft = "";
+                opPrev = "";
+                numRight = "";
+                opCurrent = "";
+                numResult = "";
+                displayValues();
             }            
         });
 
@@ -186,7 +190,11 @@ public class JavaSwingCalculator extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String OP =  e.getActionCommand();
 
-                opPrev = OP;
+                if (numLeft.isEmpty()) {
+
+                } else {
+                    opPrev = OP;
+                }
                 displayValues();
             }
         };
