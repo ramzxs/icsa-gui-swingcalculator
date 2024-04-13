@@ -10,6 +10,14 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 public class JavaSwingCalculator extends JFrame {
+    // Variables
+    String numLeft = "";
+    String opPrev = "";
+    String numRight = "";
+    String opCurrent = "";
+    String numResult = "";
+
+    // Controls
     JLabel lblExpression = new JLabel("Expression "),
             lblResult = new JLabel("0 ");
     JButton btnEq = new JButton("="),
@@ -151,8 +159,9 @@ public class JavaSwingCalculator extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String NUM = e.getActionCommand();
-                // lblExpression.setText("Number clicked: " + NUM);
-                // ????
+
+                numLeft += NUM;
+                displayValues();
             }            
         };
         btn0.addActionListener(alNums);
@@ -172,8 +181,9 @@ public class JavaSwingCalculator extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String OP =  e.getActionCommand();
-                // lblResult.setText("Operator: " + OP);
-                // ???
+
+                opPrev = OP;
+                displayValues();
             }
         };
         btnEq.addActionListener(alOps);
@@ -185,5 +195,11 @@ public class JavaSwingCalculator extends JFrame {
 
 
         this.setVisible(true);
+    }
+
+
+    public void displayValues() {
+        lblExpression.setText(numLeft + " " + opPrev + " " + numRight + " " + opCurrent);
+        lblResult.setText(numResult);
     }
 }
