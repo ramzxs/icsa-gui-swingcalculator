@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -41,8 +43,8 @@ public class JavaSwingCalculator extends JFrame {
         // USER INTERFACE COMPONENTS
         lblExpression.setHorizontalAlignment(SwingConstants.TRAILING);
         lblExpression.setOpaque(true);
-        lblExpression.setForeground(Color.WHITE);
-        lblExpression.setBackground(Color.DARK_GRAY);
+        lblExpression.setForeground(Color.BLACK);
+        lblExpression.setBackground(Color.LIGHT_GRAY);
 
         lblResult.setHorizontalAlignment(SwingConstants.TRAILING);
         lblResult.setOpaque(true);
@@ -52,7 +54,7 @@ public class JavaSwingCalculator extends JFrame {
         // UI LAYOUT
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
-        gbc.weighty = (float) 1 / 7;
+        gbc.weighty = (float) 1 / 8;
         gbc.weightx = (float) 1 / 4;
         gbc.gridheight = 1;
 
@@ -132,6 +134,54 @@ public class JavaSwingCalculator extends JFrame {
         gbc.gridy = 3;
         gbc.gridx = 2;
         this.add(btnPer, gbc);
+
+
+        // EVENT LISTENERS     
+
+        btnClear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lblExpression.setText("");
+                lblResult.setText("");
+            }            
+        });
+
+        // Listener for numbers
+        ActionListener alNums = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String NUM = e.getActionCommand();
+                // lblExpression.setText("Number clicked: " + NUM);
+                // ????
+            }            
+        };
+        btn0.addActionListener(alNums);
+        btn1.addActionListener(alNums);
+        btn2.addActionListener(alNums);
+        btn3.addActionListener(alNums);
+        btn4.addActionListener(alNums);
+        btn5.addActionListener(alNums);
+        btn6.addActionListener(alNums);
+        btn7.addActionListener(alNums);
+        btn8.addActionListener(alNums);
+        btn9.addActionListener(alNums);
+
+
+        // Listener for operator
+        ActionListener alOps = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String OP =  e.getActionCommand();
+                // lblResult.setText("Operator: " + OP);
+                // ???
+            }
+        };
+        btnEq.addActionListener(alOps);
+        btnAdd.addActionListener(alOps);
+        btnSub.addActionListener(alOps);
+        btnMulti.addActionListener(alOps);
+        btnDiv.addActionListener(alOps);
+        btnPer.addActionListener(alOps);
 
 
         this.setVisible(true);
