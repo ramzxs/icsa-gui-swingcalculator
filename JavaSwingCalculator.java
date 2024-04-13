@@ -26,8 +26,10 @@ public class JavaSwingCalculator extends JFrame {
             btn7 = new JButton("7"),
             btn8 = new JButton("8"),
             btn9 = new JButton("9");
+    JButton btnClear = new JButton("C");
 
     public static void main(String[] args) {
+        // Object -> JFrame -> Initialize Components -> Event Handling
         new JavaSwingCalculator();
     }
 
@@ -52,75 +54,85 @@ public class JavaSwingCalculator extends JFrame {
         gbc.fill = GridBagConstraints.BOTH;
         gbc.weighty = (float) 1 / 7;
         gbc.weightx = (float) 1 / 4;
+        gbc.gridheight = 1;
 
         gbc.gridy = 0;
         gbc.gridx = 0;
-        gbc.gridwidth = 3;
+        gbc.gridwidth =	4;
         this.add(lblExpression, gbc);
 
         gbc.gridy = 1;
         gbc.gridx = 0;
-        gbc.gridwidth = 3;
+        gbc.gridwidth =	4;
         gbc.gridheight = 2;
         this.add(lblResult, gbc);
 
-        gbc.gridwidth = 1;
+        // Reset height
         gbc.gridheight = 1;
 
-        gbc.gridy = 6;
-        gbc.gridx = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 2;
+        this.add(btnClear, gbc);
+
+        gbc.gridy = 7;
+        gbc.gridx = 0;
+        gbc.gridwidth = 3;
         this.add(btn0, gbc);
 
-        gbc.gridy = 5;
+        // Reset width
+        gbc.gridwidth = 1;
+        
+
+        gbc.gridy = 6;
         gbc.gridx = 0;
         this.add(btn1, gbc);
-
-        gbc.gridy = 5;
+        gbc.gridy = 6;
         gbc.gridx = 1;
         this.add(btn2, gbc);
-
-        gbc.gridy = 5;
+        gbc.gridy = 6;
         gbc.gridx = 2;
         this.add(btn3, gbc);
 
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         gbc.gridx = 0;
         this.add(btn4, gbc);
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         gbc.gridx = 1;
         this.add(btn5, gbc);
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         gbc.gridx = 2;
         this.add(btn6, gbc);
 
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.gridx = 0;
         this.add(btn7, gbc);
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.gridx = 1;
         this.add(btn8, gbc);
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.gridx = 2;
         this.add(btn9, gbc);
 
-        gbc.gridy = 6;
+        gbc.gridy = 7;
         gbc.gridx = 3;
         this.add(btnEq, gbc);
-        gbc.gridy = 5;
+        gbc.gridy = 6;
         gbc.gridx = 3;
         this.add(btnAdd, gbc);
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         gbc.gridx = 3;
         this.add(btnSub, gbc);
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.gridx = 3;
         this.add(btnMulti, gbc);
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         gbc.gridx = 3;
         this.add(btnDiv, gbc);
-        gbc.gridy = 1;
-        gbc.gridx = 3;
+        gbc.gridy = 3;
+        gbc.gridx = 2;
         this.add(btnPer, gbc);
+
 
         this.setVisible(true);
     }
