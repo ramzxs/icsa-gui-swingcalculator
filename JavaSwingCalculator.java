@@ -195,6 +195,11 @@ public class JavaSwingCalculator extends JFrame {
                 } else {
                     opPrev = OP;
                 }
+
+                if (OP.equals("=")) {
+                    // Calculate
+                    numResult  = "DO SOMETHING";
+                }
                 displayValues();
             }
         };
