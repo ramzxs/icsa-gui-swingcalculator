@@ -19,8 +19,8 @@ public class JavaSwingCalculator extends JFrame {
     String numResult = "";
 
     // Controls
-    JLabel lblExpression = new JLabel(" "),
-            lblResult = new JLabel(" ");
+    JLabel lblExpression = new JLabel(""),
+            lblResult = new JLabel("");
     JButton btnEq = new JButton("="),
             btnAdd = new JButton("+"),
             btnSub = new JButton("-"),
@@ -155,11 +155,7 @@ public class JavaSwingCalculator extends JFrame {
         btnClear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                numLeft = "";
-                opPrev = "";
-                numRight = "";
-                opCurrent = "";
-                numResult = "";
+                clearValues();
                 displayValues();
             }            
         });
@@ -242,7 +238,7 @@ public class JavaSwingCalculator extends JFrame {
                             result = Float.parseFloat(numLeft) * ((float) Float.parseFloat(numRight) / 100);
                             break;
                     }
-                    
+
                     float decimal = result - (int) result;
                     if (decimal == 0.0F) {
                         numResult = (int) result + " ";
@@ -260,8 +256,11 @@ public class JavaSwingCalculator extends JFrame {
                     }
                 }
 
-
                 displayValues();
+
+                if (opCurrent.equals("=")) {
+                    clearValues();
+                }
             }
         };
         btnEq.addActionListener(alOps);
@@ -279,5 +278,13 @@ public class JavaSwingCalculator extends JFrame {
     public void displayValues() {
         lblExpression.setText(numLeft + " " + opPrev + " " + numRight + " " + opCurrent);
         lblResult.setText(numResult);
+    }
+
+    public void clearValues() {
+        numLeft = "";
+        opPrev = "";
+        numRight = "";
+        opCurrent = "";
+        numResult = "";
     }
 }
