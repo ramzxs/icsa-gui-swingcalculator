@@ -19,8 +19,8 @@ public class JavaSwingCalculator extends JFrame {
     String numResult = "";
 
     // Controls
-    JLabel lblExpression = new JLabel("Expression "),
-            lblResult = new JLabel("0 ");
+    JLabel lblExpression = new JLabel(" "),
+            lblResult = new JLabel(" ");
     JButton btnEq = new JButton("="),
             btnAdd = new JButton("+"),
             btnSub = new JButton("-"),
@@ -171,9 +171,17 @@ public class JavaSwingCalculator extends JFrame {
                 String NUM = e.getActionCommand(); // 0
 
                 if (opPrev.isEmpty()) {
-                    numLeft += NUM;
+                    if (numLeft.isEmpty() && NUM.equals("0")) {
+
+                    } else {
+                        numLeft += NUM;
+                    }
                 } else {
-                    numRight += NUM;
+                    if (numRight.isEmpty() && NUM.equals("0")) {
+
+                    } else {
+                        numRight += NUM;
+                    }
                 }
                 displayValues();
             }            
@@ -216,23 +224,30 @@ public class JavaSwingCalculator extends JFrame {
 
                 if (!opCurrent.isEmpty()) {
                     // PERFORM THE ACTUAL CHOSEN OPERATION
-                    switch (opPrev.charAt(0)) { // -
+                    float result = 0;
+                    switch (opPrev.charAt(0)) {
                         case '+':
-                            numResult = "" + (
-                                Float.parseFloat(numLeft) + Float.parseFloat(numRight));
+                            result = Float.parseFloat(numLeft) + Float.parseFloat(numRight);
                             break;
                         case '-':
-                            numResult = "" + (Float.parseFloat(numLeft) - Float.parseFloat(numRight));  // 20.0 - 5.0 = 15.0
+                            result = Float.parseFloat(numLeft) - Float.parseFloat(numRight);
                             break;
                         case '*':
-                            numResult = "" + (Float.parseFloat(numLeft) * Float.parseFloat(numRight));
+                            result =  Float.parseFloat(numLeft) * Float.parseFloat(numRight);
                             break;
                         case '/':
-                            numResult = "" + (Float.parseFloat(numLeft) / Float.parseFloat(numRight));
+                            result = Float.parseFloat(numLeft) / Float.parseFloat(numRight);
                             break;
                         case '%':
-                            numResult = "" + (Float.parseFloat(numLeft) * ((float) Float.parseFloat(numRight) / 100)); // "" + 3.0 = "3.0"
+                            result = Float.parseFloat(numLeft) * ((float) Float.parseFloat(numRight) / 100);
                             break;
+                    }
+                    
+                    float decimal = result - (int) result;
+                    if (decimal == 0.0F) {
+                        numResult = (int) result + " ";
+                    } else {
+                        numResult = result + " ";
                     }
 
 
@@ -262,7 +277,7 @@ public class JavaSwingCalculator extends JFrame {
 
 
     public void displayValues() {
-        lblExpression.setText(numLeft + " " + opPrev + " " + numRight + " " + opCurrent); // ""
-        lblResult.setText(numResult); // ""
+        lblExpression.setText(numLeft + " " + opPrev + " " + numRight + " " + opCurrent);
+        lblResult.setText(numResult);
     }
 }
